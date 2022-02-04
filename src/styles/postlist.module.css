@@ -1,0 +1,18 @@
+.list {
+}
+
+.post {
+  width: 900px;
+  overflow-wrap: break-word;
+  /* border: 1px solid black; */
+  box-shadow: 0 0 4px 0px black;
+  margin-top: 1rem;
+}
+
+p {
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+}

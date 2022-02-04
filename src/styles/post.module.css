@@ -1,0 +1,7 @@
+.post {
+  max-width: 900px;
+  overflow-wrap: break-word;
+}
+p {
+  text-align: center;
+}
