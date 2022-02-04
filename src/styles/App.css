@@ -38,7 +38,7 @@ nav a {
 
 .main {
   max-width: 900px;
-  height: 100ch;
+  height: 100vh;
   margin: 0 auto;
   padding: 1rem;
 }

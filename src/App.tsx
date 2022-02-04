@@ -14,6 +14,7 @@ import api from './utils/api';
 import { BASE_URL } from './configs';
 import { RequireAuth } from './components/RequireAuth';
 import { Spinner } from './components/UI/Spinner';
+import { Main } from './pages/Main';
 
 function App() {
   const [getPosts, getPostById] = usePosts();
@@ -23,11 +24,12 @@ function App() {
   const [loading, setLoading] = useState(true);
   const getUsername = async () => {
     const result = await api.get(BASE_URL + 'auth');
-    if ((result.status = 200)) {
+    if (result.status === 200) {
       setAuth(true);
       setUser(result.data.username);
       console.log(result.data);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -42,6 +44,7 @@ function App() {
       ) : (
         <div className="main">
           <Routes>
+            <Route path="/" element={<Main />} />
             <Route
               path="posts"
               element={

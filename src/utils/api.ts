@@ -14,6 +14,7 @@ api.interceptors.response.use(
   (error) => {
     if (error.response.status === 401 || 403) {
       console.log('User not authorised');
+      return error;
     } else {
       return Promise.reject(error);
     }

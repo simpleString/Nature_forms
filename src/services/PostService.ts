@@ -4,7 +4,7 @@ import { IPost } from '../interfaces';
 import api from '../utils/api';
 
 export const getPostsById = async (id: number) => {
-  const result = await axios.get(BASE_URL + 'posts/' + id);
+  const result = await api.get(BASE_URL + 'posts/' + id);
   if (result.status !== 200) {
     throw 'Error';
   }
