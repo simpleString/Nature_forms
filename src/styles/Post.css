@@ -1,0 +1,21 @@
+.post {
+}
+
+.post h1 {
+}
+
+.post__markdown {
+  margin-top: 10px;
+  max-width: 900px;
+  overflow-wrap: break-word;
+}
+
+.post__button-menu {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.post__button-menu p {
+  margin: 0 10px;
+}

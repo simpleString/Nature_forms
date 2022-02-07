@@ -1,0 +1,30 @@
+.create_test {
+  margin-top: 30px;
+}
+
+.create_test_header {
+  display: flex;
+  justify-content: center;
+}
+
+.create_test h1 {
+  display: flex;
+  justify-content: center;
+}
+
+.create_test__option {
+  display: flex;
+  justify-content: space-around;
+}
+
+.create_test__option input[type='text'] {
+  max-width: 10%;
+}
+
+.create_test__delete-button {
+  cursor: pointer;
+}
+
+.create_test__delete-button:hover {
+  color: red;
+}

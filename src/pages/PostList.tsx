@@ -3,33 +3,26 @@ import { Link } from 'react-router-dom';
 import { BASE_URL } from '../configs';
 import { IPost } from '../interfaces';
 import { getAllPosts } from '../services/PostService';
-import styles from '../styles/postlist.module.css';
 import api from '../utils/api';
+import '../styles/PostList.css';
+import { useFetch } from '../hooks/useFetch';
+import { CircularProgress } from '@mui/material';
 
 export const PostList = () => {
-  const [posts, setPosts] = useState<IPost[]>();
+  const {
+    result: posts,
+    error,
+    isLoading,
+  } = useFetch<IPost[]>(BASE_URL + 'posts', 'GET');
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await api.get(BASE_URL + 'posts');
-      setPosts(result.data);
-      console.log(result.data);
-
-      // setPosts();
-    };
-    fetchData();
-  }, []);
+  if (isLoading) return <CircularProgress className="spinner" />;
 
   return (
-    <div className={styles.list}>
+    <div className="posts-list">
       {Array.isArray(posts) &&
-        posts.map((post) => (
-          <div key={post.id} className={styles.post}>
-            <div className={styles.title}>{post.title}</div>
-            {post.content}
-            <p>
-              <Link to={`${post.id}`}>Go to post</Link>
-            </p>
+        posts.map((post, i) => (
+          <div key={post.id} className="posts-list__post">
+            {i}. <Link to={`${post.id}`}>{post.title}</Link>
           </div>
         ))}
     </div>

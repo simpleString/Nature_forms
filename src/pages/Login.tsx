@@ -5,6 +5,9 @@ import { IUserData } from '../interfaces';
 
 import styles from '../styles/login.module.css';
 
+interface stateType {
+  from: { pathname: string };
+}
 export const Login = () => {
   const { login } = useAuth();
   const [user, setUser] = useState<IUserData>({ username: '', password: '' });
@@ -14,7 +17,7 @@ export const Login = () => {
     e.preventDefault();
     login(user);
     setUser({ username: '', password: '' });
-    navigate('/');
+    navigate('/', { replace: true });
   };
 
   return (

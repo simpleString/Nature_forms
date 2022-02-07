@@ -12,4 +12,5 @@ export interface IPost {
 export interface ITest {
   id: string;
   title: string;
+  question: string;
 }

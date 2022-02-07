@@ -1,0 +1,12 @@
+.posts-list {
+  border: 1px solid black;
+}
+
+.posts-list__post {
+  overflow-wrap: break-word;
+  padding: 0.313em;
+}
+
+.posts-list__post:hover {
+  background-color: #ededed;
+}

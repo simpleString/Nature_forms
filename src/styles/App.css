@@ -4,26 +4,6 @@
   margin: 0;
 }
 
-.navigation {
-  display: flex;
-  justify-content: space-between;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-nav ul {
-  display: flex;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-nav a {
-  text-decoration: none;
-  display: inline-block;
-  padding: 1rem;
-}
-
 .login {
   padding: 1rem;
 }
@@ -38,7 +18,6 @@ nav a {
 
 .main {
   max-width: 900px;
-  height: 100vh;
   margin: 0 auto;
   padding: 1rem;
 }
@@ -51,4 +30,12 @@ nav a {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.spinner {
+  display: block;
+  position: fixed;
+  z-index: 1031; /* High z-index so it is on top of the page */
+  top: 50%;
+  right: 50%; /* or: left: 50%; */
 }
