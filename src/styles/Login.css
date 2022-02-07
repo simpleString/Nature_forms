@@ -1,0 +1,14 @@
+.login-component {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 30vh 0;
+}
+
+.login-component__button {
+  margin-top: 1rem;
+}
+
+.login-component__input {
+  margin-top: 1rem;
+}

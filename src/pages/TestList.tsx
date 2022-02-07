@@ -1,3 +1,5 @@
+import { Button } from '@mui/material';
+import MDEditor from '@uiw/react-md-editor';
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -62,23 +64,30 @@ export const TestList = () => {
         {tests &&
           tests.map((test, i) => (
             <div key={i}>
-              <h1>{test.title}</h1>
+              <MDEditor.Markdown source={test.title} />
               {test.questions.map((option, j) => (
-                <div key={j} className="create_test__option">
-                  {option.name}
+                <div key={j} className="create_test__grid-option">
                   <input
                     type="radio"
                     name={test.title}
                     value={option.name}
                     onChange={radioButtonHandler}
                   />
+                  {option.name}
                 </div>
               ))}
             </div>
           ))}
       </div>
-      <div className="create_form_finish">
-        <button onClick={submitData}>Submit</button>
+      <div className="create_test__button">
+        <Button
+          variant="contained"
+          color="secondary"
+          size="small"
+          onClick={submitData}
+        >
+          Submit
+        </Button>
       </div>
     </div>
   );

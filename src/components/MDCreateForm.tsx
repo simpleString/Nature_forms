@@ -5,6 +5,7 @@ import MDEditor, {
   TextState,
   TextAreaTextApi,
 } from '@uiw/react-md-editor';
+import { TextField } from '@mui/material';
 
 interface IMDCreateForm {
   title: string;
@@ -42,11 +43,11 @@ export const MDCreateFrom = ({
 
   return (
     <div>
-      <input
-        type="text"
+      <TextField
         name="title"
         placeholder="Put down title of post"
         value={title}
+        variant="standard"
         onChange={(e) => setTitle(e.target.value)}
       />
 

@@ -7,6 +7,15 @@ import { MDCreateFrom } from '../components/MDCreateForm';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
+import MDEditor from '@uiw/react-md-editor';
+import {
+  Button,
+  FormControlLabel,
+  IconButton,
+  Radio,
+  RadioGroup,
+  TextField,
+} from '@mui/material';
 
 interface ITestForm {
   title: string;
@@ -56,7 +65,7 @@ export const CreatePost = () => {
   };
 
   const changeRadioButtonName = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
     testIndex: number,
     optionIndex: number
   ) => {
@@ -64,16 +73,15 @@ export const CreatePost = () => {
     setTests([...tests]);
   };
 
-  const changeTestTitle = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    testIndex: number
-  ) => {
-    tests[testIndex].title = e.target.value;
+  const changeTestTitle = (value = '', testIndex: number) => {
+    tests[testIndex].title = value;
     setTests([...tests]);
   };
 
   const radioButtonHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    console.log(e);
+
     const currentTest = tests.find((test) => test.title === name);
     const option = currentTest?.options.find((option) => option.name === value);
     if (currentTest && option) currentTest.rightAnswer = option.id;
@@ -93,45 +101,68 @@ export const CreatePost = () => {
         {tests &&
           tests.map((test, i) => (
             <div key={i}>
-              <h1>
-                <input
-                  type="text"
-                  value={test.title}
-                  onChange={(e) => {
-                    changeTestTitle(e, i);
-                  }}
-                />
-              </h1>
+              <MDEditor
+                value={test.title}
+                onChange={(value) => {
+                  changeTestTitle(value, i);
+                }}
+                className="create_test__title-editor"
+              />
+
               {test.options.map((option, j) => (
                 <div key={j} className="create_test__option">
-                  <input
-                    type="text"
-                    value={option.name}
-                    onChange={(e) => changeRadioButtonName(e, i, j)}
-                  />
                   <input
                     type="radio"
                     name={test.title}
                     value={option.name}
                     onChange={radioButtonHandler}
                   />
-                  <DeleteIcon
-                    onClick={() => deleteRadioButton(test, option.id)}
-                    className="create_test__delete-button"
+                  <TextField
+                    variant="standard"
+                    value={option.name}
+                    onChange={(e) => changeRadioButtonName(e, i, j)}
+                    size="small"
                   />
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() => deleteRadioButton(test, option.id)}
+                  >
+                    <DeleteIcon fontSize="inherit" />
+                  </IconButton>
                 </div>
               ))}
-
-              <button onClick={() => createRadioButton(i)}>RadioCreate</button>
+              <div className="create_test__button">
+                <Button
+                  variant="contained"
+                  size="small"
+                  onClick={() => createRadioButton(i)}
+                >
+                  RadioCreate
+                </Button>
+              </div>
             </div>
           ))}
-        <div className="create_test_header">
-          <button onClick={createTest}>Create test</button>
+        <div className="create_test__button">
+          <Button
+            variant="contained"
+            size="small"
+            onClick={createTest}
+            color="inherit"
+          >
+            Create test
+          </Button>
         </div>
       </div>
 
-      <div className="create_form_finish">
-        <button onClick={createPost}>Create</button>
+      <div>
+        <Button
+          variant="contained"
+          color="secondary"
+          size="small"
+          onClick={createPost}
+        >
+          Create
+        </Button>
       </div>
     </div>
   );
