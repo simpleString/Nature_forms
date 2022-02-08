@@ -9,6 +9,13 @@ export interface IPost {
   content: string;
 }
 
+export type IPostWithTestCount = IPost & {
+  _count: {
+    tests: number;
+  };
+  maxResult: number;
+};
+
 export interface ITest {
   id: string;
   title: string;

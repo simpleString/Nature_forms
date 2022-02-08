@@ -3,6 +3,8 @@
 }
 
 .posts-list__post {
+  display: flex;
+  justify-content: space-between;
   overflow-wrap: break-word;
   padding: 0.313em;
 }

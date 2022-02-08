@@ -44,14 +44,11 @@ export const Login = () => {
           }}
         />
       </div>
-
-      <Button
-        variant="contained"
-        onClick={loginUser}
-        className="login-component__button"
-      >
-        Login
-      </Button>
+      <div className="login-component__button">
+        <Button variant="contained" onClick={loginUser} size="small">
+          Login
+        </Button>
+      </div>
     </form>
   );
 };
