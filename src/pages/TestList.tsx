@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import MDEditor from '@uiw/react-md-editor';
 import React from 'react';
 import { useEffect, useState } from 'react';

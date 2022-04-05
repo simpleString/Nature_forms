@@ -18,6 +18,8 @@ import { CreatePost } from './pages/CreatePost';
 import { TestResult } from './pages/TestResult';
 import { useFetch } from './hooks/useFetch';
 import { CircularProgress } from '@mui/material';
+import Signup from './pages/Signup';
+import ProfileSettings from './pages/ProfileSettings';
 
 function App() {
   const [auth, setAuth] = useRecoilState(authAtom);
@@ -42,54 +44,53 @@ function App() {
   return (
     <BrowserRouter>
       <Navigation />
-
-      <div className="main">
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route
-            path="posts"
-            element={
-              <RequireAuth>
-                <PostList />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="posts/:id"
-            element={
-              <RequireAuth>
-                <Post />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="posts/:id/test/result"
-            element={
-              <RequireAuth>
-                <TestResult />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="posts/:id/test"
-            element={
-              <RequireAuth>
-                <TestList />
-              </RequireAuth>
-            }
-          />
-          <Route path="login" element={<Login />} />
-          <Route
-            path="create-post"
-            element={
-              <RequireAuth isAdmin={true}>
-                <CreatePost />
-              </RequireAuth>
-            }
-          />
-          <Route path="*" element={<NoMatch />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route
+          path="posts"
+          element={
+            <RequireAuth>
+              <PostList />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="posts/:id"
+          element={
+            <RequireAuth>
+              <Post />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="posts/:id/test/result"
+          element={
+            <RequireAuth>
+              <TestResult />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="posts/:id/test"
+          element={
+            <RequireAuth>
+              <TestList />
+            </RequireAuth>
+          }
+        />
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<Signup />} />
+        <Route path="settings" element={<ProfileSettings />} />
+        <Route
+          path="create-post"
+          element={
+            <RequireAuth isAdmin={true}>
+              <CreatePost />
+            </RequireAuth>
+          }
+        />
+        <Route path="*" element={<NoMatch />} />
+      </Routes>
     </BrowserRouter>
   );
 }

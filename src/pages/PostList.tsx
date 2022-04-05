@@ -18,18 +18,21 @@ export const PostList = () => {
   if (isLoading) return <CircularProgress className="spinner" />;
 
   return (
-    <div className="posts-list">
-      {Array.isArray(posts) &&
-        posts.map((post, i) => (
-          <div key={post.id} className="posts-list__post">
-            <div>
-              {i}. <Link to={`${post.id}`}>{post.title}</Link>
+    <div className="posts container flex">
+      <div className="posts__title">Программа курса</div>
+      {/* <div>
+        {Array.isArray(posts) &&
+          posts.map((post, i) => (
+            <div key={post.id} className="posts-list__post">
+              <div>
+                {i}. <Link to={`${post.id}`}>{post.title}</Link>
+              </div>
+              <div>
+                {post.maxResult}/{post._count.tests}
+              </div>
             </div>
-            <div>
-              {post.maxResult}/{post._count.tests}
-            </div>
-          </div>
-        ))}
+          ))}
+      </div> */}
     </div>
   );
 };

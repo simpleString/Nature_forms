@@ -6,13 +6,12 @@ import { IUserData } from '../interfaces';
 import CloseIcon from '@mui/icons-material/Close';
 
 import '../styles/Login.css';
-import { ClassNames } from '@emotion/react';
 import { Link } from 'react-router-dom';
 
 interface stateType {
   from: { pathname: string };
 }
-export const Login = () => {
+const Signup = () => {
   const { login } = useAuth();
   const [user, setUser] = useState<IUserData>({ username: '', password: '' });
   const navigate = useNavigate();
@@ -28,10 +27,10 @@ export const Login = () => {
     <div className="container flex login">
       <form className="login__form">
         <div className="login__header">
-          <Link to="/login" className="login__header-item active">
+          <Link to="/login" className="login__header-item">
             Вход
           </Link>
-          <Link to="/signup" className="login__header-item">
+          <Link to="/signup" className="login__header-item active">
             Регистрация
           </Link>
           <Link to="/">
@@ -39,6 +38,26 @@ export const Login = () => {
           </Link>
         </div>
         <div className="login__inputs">
+          <div className="login__inputs-item">
+            <span>Имя:</span>
+            <TextField
+              type="text"
+              value={user?.username}
+              onChange={(e) => setUser({ ...user, username: e.target.value })}
+              size="small"
+            />
+          </div>
+          <div className="login__inputs-item">
+            <span>Фамилия:</span>
+            <TextField
+              type="text"
+              value={user?.password}
+              size="small"
+              onChange={(e) => {
+                setUser({ ...user, password: e.target.value });
+              }}
+            />
+          </div>
           <div className="login__inputs-item">
             <span>Email:</span>
             <TextField
@@ -52,16 +71,23 @@ export const Login = () => {
             <span>Пароль:</span>
             <TextField
               type="text"
-              value={user?.password}
+              value={user?.username}
+              onChange={(e) => setUser({ ...user, username: e.target.value })}
               size="small"
-              onChange={(e) => {
-                setUser({ ...user, password: e.target.value });
-              }}
+            />
+          </div>
+          <div className="login__inputs-item">
+            <span>Статус занятости:</span>
+            <TextField
+              type="text"
+              value={user?.username}
+              onChange={(e) => setUser({ ...user, username: e.target.value })}
+              size="small"
             />
           </div>
           <div className="login__inputs-button">
             <Button variant="contained" onClick={loginUser} size="small">
-              Войти
+              Зарегистрироваться
             </Button>
           </div>
         </div>
@@ -69,3 +95,5 @@ export const Login = () => {
     </div>
   );
 };
+
+export default Signup;

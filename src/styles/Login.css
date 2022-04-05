@@ -1,14 +1,49 @@
-.login-component {
-  display: flex;
+.login {
+  justify-content: center;
   align-items: center;
-  flex-direction: column;
-  margin: 30vh 0;
 }
 
-.login-component__button {
-  margin-top: 1rem;
+.login__form {
+  background-color: #e1f0f2;
+  /* margin-top: 8em; */
 }
 
-.login-component__input {
-  margin-top: 1rem;
+.login__header {
+  padding: 10px 2em;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #000;
+}
+
+.login__header-item {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.login__inputs {
+  margin-top: 2em;
+  padding: 10px 2em;
+}
+
+.login__inputs-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.5em 0;
+}
+.login__inputs-item > span {
+  margin-right: 1em;
+  flex: 1 1 5px;
+}
+
+.login__inputs-button > .MuiButton-root {
+  margin-top: 1em;
+  background: linear-gradient(92.13deg, #044945 37.5%, #093230 73.58%);
+  box-shadow: 0px 9px 35px rgba(196, 220, 225, 0.56);
+  border-radius: 110px;
+  width: 100%;
+  padding: 6px;
+  text-transform: none;
 }

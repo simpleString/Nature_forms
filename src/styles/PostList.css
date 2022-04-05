@@ -1,4 +1,16 @@
-.posts-list {
+.posts {
+  align-items: flex-start;
+}
+
+.posts__title {
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 2em;
+  font-weight: 800;
+  font-size: 1.5em;
+}
+
+/* .posts-list {
   border: 1px solid black;
 }
 
@@ -11,4 +23,4 @@
 
 .posts-list__post:hover {
   background-color: #ededed;
-}
+} */
