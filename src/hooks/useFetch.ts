@@ -12,7 +12,12 @@ import api from '../utils/api';
 
 export type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
-export const useFetch = <T>(url: string, method: Method, data = undefined) => {
+export const useFetch = <T>(
+  url: string,
+  method: Method,
+  data?: any,
+  id?: any
+) => {
   const [result, setResult] = useState<T>();
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +42,7 @@ export const useFetch = <T>(url: string, method: Method, data = undefined) => {
       setStatus(result.status);
       setIsLoading(false);
     })();
-  }, []);
+  }, [id]);
 
   return { result, error, isLoading, status };
 };

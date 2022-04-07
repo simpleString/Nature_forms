@@ -1,0 +1,30 @@
+.rating {
+  margin-top: 3em;
+  display: grid;
+  height: auto;
+  grid-template-columns: 3fr 1fr 1fr;
+  grid-auto-rows: 3em;
+}
+
+.rating__item {
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  padding-left: 1em;
+  background-color: white;
+}
+
+.rating li {
+  display: inline-block;
+}
+
+.center-item {
+  justify-content: center;
+  padding: 0;
+}
+
+.rating__title {
+  border: none;
+  align-items: flex-end;
+  background-color: initial;
+}

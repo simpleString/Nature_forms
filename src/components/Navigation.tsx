@@ -15,7 +15,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 const listLinks = [
   { link: '/', title: 'Главная' },
   { link: '/posts', title: 'Курс' },
-  { link: '/', title: 'Оценки' },
+  { link: '/rating', title: 'Оценки' },
 ];
 
 export const Navigation = () => {
@@ -55,9 +55,9 @@ export const Navigation = () => {
             <Link to="">Главная</Link>
 
             <Link to="posts">Курс</Link>
-            <Link to="posts">Оценки</Link>
+            <Link to="rating">Оценки</Link>
 
-            {username === 'admin' && <Link to="create-post">CreatePost</Link>}
+            {username === 'admin' && <Link to="createPost">CreatePost</Link>}
           </nav>
           <div className="navigaton__login">
             {!auth ? (

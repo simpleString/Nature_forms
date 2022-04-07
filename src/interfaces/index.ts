@@ -7,6 +7,9 @@ export interface IPost {
   id: number;
   title: string;
   content: string;
+  category: string;
+  img: string;
+  tests: ITest[];
 }
 
 export type IPostWithTestCount = IPost & {

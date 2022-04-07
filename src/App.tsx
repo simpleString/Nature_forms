@@ -4,10 +4,8 @@ import { Navigation } from './components/Navigation';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Login } from './pages/Login';
 import { PostList } from './pages/PostList';
-import { Post } from './pages/Post';
 import { NoMatch } from './pages/NoMatch';
 import { TestList } from './pages/TestList';
-import { usePosts } from './hooks/usePosts';
 import { useRecoilState } from 'recoil';
 import { authAtom, userAtom } from './state';
 import api from './utils/api';
@@ -20,6 +18,8 @@ import { useFetch } from './hooks/useFetch';
 import { CircularProgress } from '@mui/material';
 import Signup from './pages/Signup';
 import ProfileSettings from './pages/ProfileSettings';
+import Rating from './pages/Rating';
+import Post from './pages/Post';
 
 function App() {
   const [auth, setAuth] = useRecoilState(authAtom);
@@ -55,6 +55,14 @@ function App() {
           }
         />
         <Route
+          path="rating"
+          element={
+            <RequireAuth>
+              <Rating />
+            </RequireAuth>
+          }
+        />
+        <Route
           path="posts/:id"
           element={
             <RequireAuth>
@@ -82,7 +90,7 @@ function App() {
         <Route path="signup" element={<Signup />} />
         <Route path="settings" element={<ProfileSettings />} />
         <Route
-          path="create-post"
+          path="createPost"
           element={
             <RequireAuth isAdmin={true}>
               <CreatePost />

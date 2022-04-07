@@ -3,19 +3,25 @@ import React, { useState } from 'react';
 import '../styles/createPost.css';
 import api from '../utils/api';
 import { BASE_URL } from '../configs';
-import { MDCreateFrom } from '../components/MDCreateForm';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
 import MDEditor from '@uiw/react-md-editor';
 import {
   Button,
+  FormControl,
   FormControlLabel,
   IconButton,
+  Input,
+  InputLabel,
+  MenuItem,
   Radio,
   RadioGroup,
+  Select,
+  SelectChangeEvent,
   TextField,
 } from '@mui/material';
+import { useFetch } from '../hooks/useFetch';
 
 interface ITestForm {
   title: string;
@@ -26,24 +32,52 @@ interface ITestForm {
   rightAnswer: number;
 }
 
+interface IPostCategory {
+  id: number;
+  name: string;
+}
+
 export const CreatePost = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [category, setCategory] = useState('');
+
+  const [selectedImage, setSelectedImage] = useState<any>();
 
   const [tests, setTests] = useState<ITestForm[]>([]);
   const navigate = useNavigate();
 
+  const { result: categories, isLoading } = useFetch<IPostCategory[]>(
+    BASE_URL + 'posts/categories',
+    'GET'
+  );
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setCategory(event.target.value as string);
+  };
+
   const createPost = async () => {
+    const form = new FormData();
+    form.append('file', selectedImage);
+    await api.post('posts/image', form, {
+      headers: {
+        'Content-Type': `multipart/form-data;`,
+      },
+    });
+
     const result = await api.post(BASE_URL + 'posts', {
       title,
       content,
+      categoryId: category,
       tests,
+      img: selectedImage.name,
     });
     console.log(result);
 
     if (result.status === 200) {
       navigate('posts/' + result.data.id + '/test');
     }
+
     console.log(result.data);
   };
 
@@ -89,14 +123,54 @@ export const CreatePost = () => {
   };
 
   return (
-    <div>
-      <MDCreateFrom
-        title={title}
-        content={content}
-        setContent={setContent}
-        setTitle={setTitle}
+    <div className="container">
+      <TextField
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        size="small"
       />
+      <MDEditor
+        title={title}
+        value={content}
+        onChange={(value) => setContent(value || '')}
+      />
+      {!isLoading && (
+        <div>
+          <InputLabel>Category</InputLabel>
+          <Select value={category} label="Category" onChange={handleChange}>
+            {categories?.map((category) => (
+              <MenuItem key={category.id} value={category.id}>
+                {category.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </div>
+      )}
+      <div>
+        {selectedImage && (
+          <div>
+            <img
+              alt="not fount"
+              width={'250px'}
+              src={URL.createObjectURL(selectedImage)}
+            />
+            <br />
+            <button onClick={() => setSelectedImage(null)}>Remove</button>
+          </div>
+        )}
+        <br />
 
+        <br />
+        <input
+          type="file"
+          name="myImage"
+          onChange={(event): any => {
+            console.log(event.target.files);
+            setSelectedImage(event.target.files![0]);
+          }}
+        />
+      </div>
       <div className="create_test">
         {tests &&
           tests.map((test, i) => (
@@ -153,7 +227,6 @@ export const CreatePost = () => {
           </Button>
         </div>
       </div>
-
       <div>
         <Button
           variant="contained"
