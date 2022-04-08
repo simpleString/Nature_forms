@@ -1,0 +1,32 @@
+.test {
+  padding: 2em 4em;
+}
+
+.test * {
+  margin: auto;
+}
+
+.test__title {
+  padding: 6px 0;
+}
+
+.test__row {
+  padding: 4px 0;
+}
+
+.test__row span {
+  margin-left: 10px;
+}
+
+.test__row input[type='radio'] {
+  height: 20px;
+  width: 20px;
+  vertical-align: middle;
+  margin-right: 1rem;
+  accent-color: black;
+}
+
+.test__button {
+  width: 50%;
+  min-width: 200px;
+}

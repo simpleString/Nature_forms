@@ -1,5 +1,5 @@
 export interface IUserData {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -23,4 +23,17 @@ export interface ITest {
   id: string;
   title: string;
   question: string;
+}
+
+export interface IUserSignDTO {
+  username: string;
+  surname: string;
+  password: string;
+  email: string;
+  status: string;
+}
+
+export interface IUserStatus {
+  id: number;
+  name: string;
 }

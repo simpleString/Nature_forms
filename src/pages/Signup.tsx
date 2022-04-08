@@ -1,26 +1,35 @@
-import { Button, TextField } from '@mui/material';
+import { Button, MenuItem, Select, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { IUserData } from '../interfaces';
+import { IUserData, IUserSignDTO, IUserStatus } from '../interfaces';
 import CloseIcon from '@mui/icons-material/Close';
 
 import '../styles/Login.css';
 import { Link } from 'react-router-dom';
+import { useFetch } from '../hooks/useFetch';
+import { BASE_URL } from '../configs';
 
-interface stateType {
-  from: { pathname: string };
-}
 const Signup = () => {
-  const { login } = useAuth();
-  const [user, setUser] = useState<IUserData>({ username: '', password: '' });
+  const { result: statuses, isLoading } = useFetch<IUserStatus[]>(
+    BASE_URL + 'auth/' + 'statuses',
+    'GET'
+  );
+
+  const { login, signUp } = useAuth();
+  const [user, setUser] = useState<IUserSignDTO>({
+    username: '',
+    password: '',
+    email: '',
+    surname: '',
+    status: '',
+  });
   const navigate = useNavigate();
 
   const loginUser = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    login(user);
-    setUser({ username: '', password: '' });
-    navigate('/', { replace: true });
+    signUp(user);
+    navigate('/login', { replace: true });
   };
 
   return (
@@ -51,10 +60,10 @@ const Signup = () => {
             <span>Фамилия:</span>
             <TextField
               type="text"
-              value={user?.password}
+              value={user?.surname}
               size="small"
               onChange={(e) => {
-                setUser({ ...user, password: e.target.value });
+                setUser({ ...user, surname: e.target.value });
               }}
             />
           </div>
@@ -62,8 +71,8 @@ const Signup = () => {
             <span>Email:</span>
             <TextField
               type="text"
-              value={user?.username}
-              onChange={(e) => setUser({ ...user, username: e.target.value })}
+              value={user?.email}
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
               size="small"
             />
           </div>
@@ -71,19 +80,27 @@ const Signup = () => {
             <span>Пароль:</span>
             <TextField
               type="text"
-              value={user?.username}
-              onChange={(e) => setUser({ ...user, username: e.target.value })}
+              value={user?.password}
+              onChange={(e) => setUser({ ...user, password: e.target.value })}
               size="small"
             />
           </div>
           <div className="login__inputs-item">
             <span>Статус занятости:</span>
-            <TextField
-              type="text"
-              value={user?.username}
-              onChange={(e) => setUser({ ...user, username: e.target.value })}
+            <Select
+              fullWidth
               size="small"
-            />
+              value={user.status}
+              onChange={(e) => {
+                setUser({ ...user, status: e.target.value });
+              }}
+            >
+              {statuses?.map((status) => (
+                <MenuItem key={status.id} value={status.id}>
+                  {status.name}
+                </MenuItem>
+              ))}
+            </Select>
           </div>
           <div className="login__inputs-button">
             <Button variant="contained" onClick={loginUser} size="small">

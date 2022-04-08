@@ -47,15 +47,12 @@ const Post = () => {
         <div className="post__footer-buttons">
           {result?.previousPost && (
             <>
-              <div>
-                <Link
-                  className="post__left-link"
-                  to={`../posts/${result.previousPost.id}`}
-                >
-                  Вернуться к предыдущей теме
-                </Link>
-              </div>
-              <img src={ArrowLeft} />
+              <Link
+                className="post__left-link"
+                to={`../posts/${result.previousPost.id}`}
+              >
+                Вернуться к предыдущей теме
+              </Link>
             </>
           )}
 

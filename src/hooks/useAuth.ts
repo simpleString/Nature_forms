@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
-import { IUserData } from '../interfaces';
+import { IUserData, IUserSignDTO } from '../interfaces';
 import { authAtom, userAtom } from '../state';
 import api from '../utils/api';
 
@@ -24,6 +24,7 @@ export const useAuth = () => {
     }
     console.log(result);
   };
+
   const logout = async () => {
     const result = await api.get('auth/logout');
     if (result.status === 200) {
@@ -33,5 +34,19 @@ export const useAuth = () => {
     console.log(result);
   };
 
-  return { auth, login, logout };
+  const signUp = async (newUser: IUserSignDTO) => {
+    const result = await api.post('auth/signup', newUser);
+    if (result.status === 202) {
+    }
+    console.log(result);
+  };
+
+  const updateUser = async (user: IUserSignDTO) => {
+    const result = await api.put('auth/user', user);
+    if (result.status === 200) {
+    }
+    console.log(result);
+  };
+
+  return { auth, login, logout, signUp, updateUser };
 };

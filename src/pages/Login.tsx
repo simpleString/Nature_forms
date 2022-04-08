@@ -14,13 +14,13 @@ interface stateType {
 }
 export const Login = () => {
   const { login } = useAuth();
-  const [user, setUser] = useState<IUserData>({ username: '', password: '' });
+  const [user, setUser] = useState<IUserData>({ email: '', password: '' });
   const navigate = useNavigate();
 
   const loginUser = (e: React.SyntheticEvent) => {
     e.preventDefault();
     login(user);
-    setUser({ username: '', password: '' });
+    setUser({ email: '', password: '' });
     navigate('/', { replace: true });
   };
 
@@ -43,8 +43,8 @@ export const Login = () => {
             <span>Email:</span>
             <TextField
               type="text"
-              value={user?.username}
-              onChange={(e) => setUser({ ...user, username: e.target.value })}
+              value={user?.email}
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
               size="small"
             />
           </div>

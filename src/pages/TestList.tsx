@@ -5,11 +5,15 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { BASE_URL } from '../configs';
 import api from '../utils/api';
+import '../styles/TestList.css';
 
 interface ITestResponse {
   id: number;
   title: string;
   postId: number;
+  post: {
+    title: string;
+  };
   questions: {
     id: number;
     name: string;
@@ -44,7 +48,7 @@ export const TestList = () => {
   const submitData = async () => {
     const result = await api.post(BASE_URL + 'posts/' + id + '/tests', answers);
     console.log(result);
-    navigate('/posts/' + id);
+    navigate('result');
   };
 
   useEffect(() => {
@@ -59,34 +63,32 @@ export const TestList = () => {
   }, []);
 
   return (
-    <div>
-      <div className="create_test">
-        {tests &&
-          tests.map((test, i) => (
-            <div key={i}>
-              <MDEditor.Markdown source={test.title} />
-              {test.questions.map((option, j) => (
-                <div key={j} className="create_test__grid-option">
-                  <input
-                    type="radio"
-                    name={test.title}
-                    value={option.name}
-                    onChange={radioButtonHandler}
-                  />
-                  {option.name}
-                </div>
-              ))}
+    <div className="test container">
+      <div className="test__title">Тест по разделу {tests[0]?.post.title}</div>
+      {tests.map((test, i) => (
+        <div className="test__question" key={i}>
+          <MDEditor.Markdown className="test__title" source={`${test.title}`} />
+          {test.questions.map((option, j) => (
+            <div key={j} className="test__row">
+              <input
+                type="radio"
+                name={test.title}
+                value={option.name}
+                onChange={radioButtonHandler}
+              />
+              <span>{option.name}</span>
             </div>
           ))}
-      </div>
-      <div className="create_test__button">
+        </div>
+      ))}
+      <div className="login__inputs-button test__button">
         <Button
           variant="contained"
           color="secondary"
           size="small"
           onClick={submitData}
         >
-          Submit
+          Проверить
         </Button>
       </div>
     </div>
