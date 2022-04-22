@@ -24,6 +24,10 @@
   margin: 2em;
 }
 
+.posts__item > p {
+  width: 220px;
+}
+
 .posts__item > p:after {
   content: '';
   display: inline-block;

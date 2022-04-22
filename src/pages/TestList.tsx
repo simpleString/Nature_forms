@@ -12,7 +12,9 @@ interface ITestResponse {
   title: string;
   postId: number;
   post: {
-    title: string;
+    category: {
+      name: string;
+    }
   };
   questions: {
     id: number;
@@ -60,11 +62,11 @@ export const TestList = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [id]);
 
   return (
     <div className="test container">
-      <div className="test__title">Тест по разделу {tests[0]?.post.title}</div>
+      <div className="test__title">Тест по разделу {tests[0]?.post.category.name}</div>
       {tests.map((test, i) => (
         <div className="test__question" key={i}>
           <MDEditor.Markdown className="test__title" source={`${test.title}`} />

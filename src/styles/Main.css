@@ -23,7 +23,7 @@
 }
 
 .main-page__image-div {
-  flex: 0 1 50%;
+  flex: 1 1 70%;
 }
 
 @media (max-width: 600px) {

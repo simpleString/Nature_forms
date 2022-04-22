@@ -30,6 +30,10 @@
   margin: auto;
 }
 
+.navigation__nav-active {
+  font-weight: 700;
+}
+
 @media (max-width: 600px) {
   .navigation__nav {
     display: none;

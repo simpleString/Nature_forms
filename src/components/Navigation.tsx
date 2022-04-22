@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { useAuth } from '../hooks/useAuth';
 import { userAtom } from '../state';
@@ -43,7 +43,8 @@ export const Navigation = () => {
   };
 
   const username = useRecoilValue(userAtom);
-
+  const location = useLocation();
+  
   return (
     <>
       <div className="navigation">
@@ -52,10 +53,10 @@ export const Navigation = () => {
             <img src={logo} className="img" /> АТЛАС КЛЕТОЧНОГО МИРА
           </div>
           <nav className="navigation__nav">
-            <Link to="">Главная</Link>
+            <Link  className={location.pathname === '/'? 'navigation__nav-active': ''} to="">Главная</Link>
 
-            <Link to="posts">Курс</Link>
-            <Link to="rating">Оценки</Link>
+            <Link className={location.pathname === '/posts'? 'navigation__nav-active': ''} to="posts">Курс</Link>
+            <Link className={location.pathname === '/rating'? 'navigation__nav-active': ''} to="rating">Оценки</Link>
 
             {username === 'admin' && <Link to="createPost">CreatePost</Link>}
           </nav>
