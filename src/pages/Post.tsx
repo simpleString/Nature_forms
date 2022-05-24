@@ -6,7 +6,14 @@ import MDEditor from '@uiw/react-md-editor';
 import '../styles/Post.css';
 import { useFetch } from '../hooks/useFetch';
 import { CircularProgress } from '@mui/material';
-import ArrowLeft from '../Images/Arrow_left.png';
+import Carousel from 'react-material-ui-carousel';
+import Cell from '../Cell.png';
+
+import { Suspense, useRef } from 'react';
+import { Canvas } from '@react-three/fiber';
+
+import Model from '../components/Mode';
+import { OrbitControls, Stage } from '@react-three/drei';
 
 interface IPostDataExtendent {
   post: IPost;
@@ -15,6 +22,7 @@ interface IPostDataExtendent {
 }
 
 const Post = () => {
+  const ref = useRef<any>();
   const { id } = useParams();
 
   const { result, isLoading } = useFetch<IPostDataExtendent>(
@@ -31,6 +39,35 @@ const Post = () => {
   return (
     <div className="post container">
       <h1 className="post__title">{result && result.post.title}</h1>
+      {result?.post.title === 'Особенности строения растительной клетки' && (
+        <>
+          <Carousel
+            height={400}
+            autoPlay={false}
+            className="corousel"
+            swipe={false}
+          >
+            <div className="post__img-container">
+              <img className="post__img" src={Cell} />
+            </div>
+            <Canvas shadows dpr={[1, 2]} camera={{ fov: 50 }}>
+              <ambientLight position={[10, 10, 10]} />
+              {/* <pointLight position={} /> */}
+              <Suspense fallback={null}>
+                {/* <Stage
+                  controls={ref}
+                  preset="rembrandt"
+                  intensity={0}
+                  environment="city"
+                > */}
+                <Model />
+                {/* </Stage> */}
+              </Suspense>
+              <OrbitControls ref={ref} autoRotate />
+            </Canvas>
+          </Carousel>
+        </>
+      )}
       <MDEditor.Markdown
         source={result ? result.post.content : ''}
         className="post__markdown"

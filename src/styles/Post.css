@@ -15,6 +15,22 @@
   background-color: black;
 }
 
+.post__img {
+  object-fit: contain;
+  max-width: 100%;
+  height: 400px;
+  /* max-height: 100%; */
+}
+
+.post__img-container {
+  display: flex;
+  justify-content: center;
+}
+
+.corousel {
+  border: 1px solid black;
+}
+
 .post__markdown {
   margin-top: 2em;
 }
